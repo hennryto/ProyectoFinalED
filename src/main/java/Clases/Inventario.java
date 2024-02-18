@@ -5,7 +5,6 @@
 package Clases;
 
 
-
 public class Inventario {
     private NodoProducto primerNodo;
     
