@@ -8,8 +8,10 @@ import javax.swing.ImageIcon;
 import Clases.Conexion;
 import Clases.Usuario;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,13 +37,26 @@ public class JLogin extends javax.swing.JFrame {
         city.setIcon(icono);
         ImageIcon icono2 = new ImageIcon("src\\main\\java\\Imagenes\\logo.png");
         logo.setIcon(icono2);
-        ImageIcon icono3 = new ImageIcon("src\\main\\java\\Imagenes\\favicon.png");
+        ImageIcon icono3 = new ImageIcon("src\\main\\java\\Imagenes\\NYHLogo.png");
         Logo2.setIcon(icono3);
+        setIconImage(new ImageIcon("src\\main\\java\\Imagenes\\NYHLogo.png").getImage());
+        SetImageLabel(Logo2, "src\\main\\java\\Imagenes\\NYHLogo.png");
+        Dimension displayLogin = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = displayLogin.height;
+        int width = displayLogin.width;
+        setLocation((width - getWidth()) / 2, (height - getHeight()) / 2);
         
      
         
     }
-
+    
+    private static void SetImageLabel(JLabel Logo2, String root ){
+        ImageIcon image =new ImageIcon(root);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(Logo2.getWidth(), Logo2.getHeight(), Image.SCALE_DEFAULT));
+        Logo2.setIcon(icon);
+        
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,8 +100,7 @@ public class JLogin extends javax.swing.JFrame {
 
         Logo2.setFont(new java.awt.Font("Roboto Medium", 0, 24)); // NOI18N
         Logo2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Logo2.setText("LOGO");
-        background.add(Logo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 90));
+        background.add(Logo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 250, 100));
 
         titulo.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
         titulo.setText("INICIAR SESIÓN");
