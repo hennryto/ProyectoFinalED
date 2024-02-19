@@ -20,7 +20,6 @@ public class Conexion {
         String PASS = "12345";
         try {
             Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            JOptionPane.showMessageDialog(null, "Conectado " );
             return connection;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al conectar a SQL Server: " + e.getMessage());
