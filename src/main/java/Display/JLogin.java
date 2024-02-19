@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import Clases.Conexion;
 import Clases.Usuario;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -45,18 +46,16 @@ public class JLogin extends javax.swing.JFrame {
         int height = displayLogin.height;
         int width = displayLogin.width;
         setLocation((width - getWidth()) / 2, (height - getHeight()) / 2);
-        
-     
-        
+
     }
-    
-    private static void SetImageLabel(JLabel Logo2, String root ){
-        ImageIcon image =new ImageIcon(root);
+
+    private static void SetImageLabel(JLabel Logo2, String root) {
+        ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(Logo2.getWidth(), Logo2.getHeight(), Image.SCALE_DEFAULT));
         Logo2.setIcon(icon);
-        
-    
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,8 +78,8 @@ public class JLogin extends javax.swing.JFrame {
         Password = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         txtPassword = new javax.swing.JPasswordField();
-        panelIngresar = new javax.swing.JPanel();
-        jLabelIngresar = new javax.swing.JLabel();
+        loginBtn = new javax.swing.JPanel();
+        loginBtnTxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,6 +113,11 @@ public class JLogin extends javax.swing.JFrame {
         txtUsuario1.setForeground(new java.awt.Color(204, 204, 204));
         txtUsuario1.setText("Ingrese su nombre de usuario");
         txtUsuario1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtUsuario1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtUsuario1MousePressed(evt);
+            }
+        });
         background.add(txtUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 470, 40));
         background.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
 
@@ -125,6 +129,11 @@ public class JLogin extends javax.swing.JFrame {
         txtPassword.setForeground(new java.awt.Color(204, 204, 204));
         txtPassword.setText("jPasswordField1");
         txtPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtPasswordMousePressed(evt);
+            }
+        });
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
@@ -132,30 +141,46 @@ public class JLogin extends javax.swing.JFrame {
         });
         background.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 470, 40));
 
-        panelIngresar.setBackground(new java.awt.Color(0, 134, 190));
+        loginBtn.setBackground(new java.awt.Color(0, 134, 190));
+        loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                loginBtnMouseEntered(evt);
+            }
+        });
 
-        jLabelIngresar.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
-        jLabelIngresar.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelIngresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelIngresar.setText("Ingresar");
-        jLabelIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelIngresar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabelIngresar.setPreferredSize(new java.awt.Dimension(150, 60));
+        loginBtnTxt.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        loginBtnTxt.setForeground(new java.awt.Color(255, 255, 255));
+        loginBtnTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loginBtnTxt.setText("Ingresar");
+        loginBtnTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginBtnTxt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        loginBtnTxt.setPreferredSize(new java.awt.Dimension(150, 60));
+        loginBtnTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginBtnTxtMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                loginBtnTxtMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                loginBtnTxtMouseExited(evt);
+            }
+        });
 
-        javax.swing.GroupLayout panelIngresarLayout = new javax.swing.GroupLayout(panelIngresar);
-        panelIngresar.setLayout(panelIngresarLayout);
-        panelIngresarLayout.setHorizontalGroup(
-            panelIngresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelIngresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout loginBtnLayout = new javax.swing.GroupLayout(loginBtn);
+        loginBtn.setLayout(loginBtnLayout);
+        loginBtnLayout.setHorizontalGroup(
+            loginBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginBtnTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        panelIngresarLayout.setVerticalGroup(
-            panelIngresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIngresarLayout.createSequentialGroup()
-                .addComponent(jLabelIngresar, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+        loginBtnLayout.setVerticalGroup(
+            loginBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginBtnLayout.createSequentialGroup()
+                .addComponent(loginBtnTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        background.add(panelIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 150, 60));
+        background.add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 150, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,6 +199,73 @@ public class JLogin extends javax.swing.JFrame {
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void loginBtnTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnTxtMouseEntered
+        loginBtn.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_loginBtnTxtMouseEntered
+
+    private void loginBtnTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnTxtMouseExited
+        loginBtn.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_loginBtnTxtMouseExited
+
+    private void loginBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseEntered
+        loginBtnTxt.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_loginBtnMouseEntered
+
+    private void txtUsuario1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuario1MousePressed
+          if (txtUsuario1.getText().equals("Ingrese su nombre de usuario")) {
+            txtUsuario1.setText("");
+            txtUsuario1.setForeground(Color.BLACK);
+        }
+        if (String.valueOf(txtPassword.getPassword()).isEmpty()) {
+            txtPassword.setText("********");
+            txtPassword.setForeground(Color.GRAY);
+        }
+        
+    }//GEN-LAST:event_txtUsuario1MousePressed
+
+    private void txtPasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMousePressed
+      if (String.valueOf(txtPassword.getPassword()).equals("********")) {
+            txtPassword.setText("");
+            txtPassword.setForeground(Color.BLACK);
+        } if (txtUsuario1.getText().isEmpty()) {
+            txtUsuario1.setText("Ingrese su nombre de usuario");
+            txtUsuario1.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txtPasswordMousePressed
+
+    private void loginBtnTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnTxtMouseClicked
+        Usuario usuario = new Usuario();
+        usuario.setUsuario(txtUsuario1.getText());
+        usuario.setContrasenna(new String(txtPassword.getPassword()));
+         try {
+            Connection connection = Conexion.getConexion();
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Usuarios WHERE usuario = ? AND password = ?");
+            ps.setString(1, usuario.getUsuario());
+            ps.setString(2, usuario.getContrasenna());
+            try ( ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String tipoUsuario = rs.getString("tipoUsuario");
+                    if (tipoUsuario.equals("A")) {
+                        JAdmin jAdmin = new JAdmin();
+                        jAdmin.setVisible(true);
+                    } else if (tipoUsuario.equals("E")) {
+                        JCarrito jFrameCarrito = new JCarrito();
+                        jFrameCarrito.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Tipo de usuario no válido.");
+                    }
+                    this.dispose();
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.");
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        Connection connection = Conexion.getConexion();
+    }//GEN-LAST:event_loginBtnTxtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -215,13 +307,13 @@ public class JLogin extends javax.swing.JFrame {
     private javax.swing.JLabel Password;
     private javax.swing.JPanel background;
     private javax.swing.JLabel city;
-    private javax.swing.JLabel jLabelIngresar;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JPanel loginBtn;
+    private javax.swing.JLabel loginBtnTxt;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel name;
-    private javax.swing.JPanel panelIngresar;
     private javax.swing.JLabel titulo;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario1;
