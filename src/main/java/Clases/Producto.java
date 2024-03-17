@@ -9,14 +9,26 @@ package Clases;
  * @author HENRYTO
  */
 public class Producto {
+    private int id;
     private String nombre;
     private String descripcion;
     private int cantidad;
+    private double precio;
     
-     public Producto(String nombre, String descripcion, int cantidad) {
+     public Producto(int id, String nombre, String descripcion, int cantidad, double precio) {
+         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
+        this.precio = precio;
+    }
+     
+         public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getCantidad() {
@@ -41,6 +53,14 @@ public class Producto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+    
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
       
 }

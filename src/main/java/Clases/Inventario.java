@@ -6,11 +6,13 @@ package Clases;
 
 
 public class Inventario {
+
     private NodoProducto primerNodo;
-    
+
     public Inventario() {
         this.primerNodo = null;
     }
+
     public void agregarProducto(Producto producto) {
         NodoProducto nuevoNodo = new NodoProducto(producto);
         if (primerNodo == null) {
@@ -23,7 +25,8 @@ public class Inventario {
             actual.setSiguiente(nuevoNodo);
         }
     }
-     public void actualizarProducto(String nombreProducto, int nuevaCantidad) {
+
+    public void actualizarProducto(String nombreProducto, int nuevaCantidad) {
         NodoProducto actual = primerNodo;
         while (actual != null) {
             if (actual.getProducto().getNombre().equals(nombreProducto)) {
@@ -33,7 +36,8 @@ public class Inventario {
             actual = actual.getSiguiente();
         }
     }
-     public void eliminarProducto(String nombreProducto) {
+
+    public void eliminarProducto(String nombreProducto) {
         if (primerNodo == null) {
             return;
         }
@@ -52,7 +56,8 @@ public class Inventario {
             actual = actual.getSiguiente();
         }
     }
-     public Producto buscarProductoPorNombre(String nombreProducto) {
+
+    public Producto buscarProductoPorNombre(String nombreProducto) {
         NodoProducto actual = primerNodo;
         while (actual != null) {
             if (actual.getProducto().getNombre().equals(nombreProducto)) {
@@ -62,5 +67,6 @@ public class Inventario {
         }
         return null;
     }
+
 
 }

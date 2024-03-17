@@ -88,7 +88,7 @@ public class JLogin extends javax.swing.JFrame {
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        background.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 300, 170));
+        background.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 310, 170));
 
         name.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         name.setForeground(new java.awt.Color(255, 255, 255));
@@ -240,7 +240,7 @@ public class JLogin extends javax.swing.JFrame {
         usuario.setContrasenna(new String(txtPassword.getPassword()));
          try {
             Connection connection = Conexion.getConexion();
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Usuarios WHERE usuario = ? AND password = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT tipoUsuario FROM Usuarios WHERE usuario = ? AND password = ?");
             ps.setString(1, usuario.getUsuario());
             ps.setString(2, usuario.getContrasenna());
             try ( ResultSet rs = ps.executeQuery()) {
@@ -250,8 +250,8 @@ public class JLogin extends javax.swing.JFrame {
                         JAdmin jAdmin = new JAdmin();
                         jAdmin.setVisible(true);
                     } else if (tipoUsuario.equals("E")) {
-                        JCarrito jFrameCarrito = new JCarrito();
-                        jFrameCarrito.setVisible(true);
+                        JAdmin jAdmin = new JAdmin();
+                        jAdmin.setVisible(true);
                         this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, "Tipo de usuario no válido.");

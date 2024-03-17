@@ -9,6 +9,7 @@ package Clases;
  * @author HENRYTO
  */
 public class Usuario {
+    private int id;
     private String usuario;
     private String contrasenna;
     private String nombre;
@@ -17,6 +18,7 @@ public class Usuario {
     private int numeroTelefono;
     private String email;
     private String tipodeUsuario;
+    int activo;
 
     public String getUsuario() {
         return usuario;
@@ -81,11 +83,27 @@ public class Usuario {
     public void setTipodeUsuario(String tipodeUsuario) {
         this.tipodeUsuario = tipodeUsuario;
     }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
 
     public Usuario() {
     }
 
-    public Usuario(String usuario, String contrasenna, String nombre, String apellido, String direccion, int numeroTelefono, String email, String tipodeUsuario) {
+    public Usuario(int id, String usuario, String contrasenna, String nombre, String apellido, String direccion, int numeroTelefono, String email, String tipodeUsuario, int activo) {
+        this.id = id;
         this.usuario = usuario;
         this.contrasenna = contrasenna;
         this.nombre = nombre;
@@ -94,16 +112,28 @@ public class Usuario {
         this.numeroTelefono = numeroTelefono;
         this.email = email;
         this.tipodeUsuario = tipodeUsuario;
+        this.activo = activo;
     }
 
     @Override
     public String toString() {
-        return "Usuarios: " + "usuario:" + usuario + " Contraseña: " + contrasenna + " Nombre: " + nombre + " Apellido=" + apellido + " Direccion: " + direccion + ", Numero de Telefono: " + numeroTelefono + ", Email: " + email + ", Tipo de Usuario: " + tipodeUsuario + "";
-       
+        return "Usuario{" +
+                "id=" + id +
+                ", usuario='" + usuario + '\'' +
+                ", contrasenna='" + contrasenna + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", numeroTelefono=" + numeroTelefono +
+                ", email='" + email + '\'' +
+                ", tipodeUsuario='" + tipodeUsuario + '\'' +
+                ", activo=" + activo +
+                '}';
     }
     public boolean compararContrasenna(String contrasenna) {
     return this.contrasenna.equals(contrasenna);
     
     
 }
+
 }

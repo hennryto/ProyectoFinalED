@@ -14,12 +14,14 @@ import javax.swing.JOptionPane;
 public class Conexion {
     private static Connection connection;
     public static Connection getConexion() {
-        String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=Proyecto2;"
+        String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=ED2024;"
                 + "encrypt=true;trustServerCertificate=true";
         String USER = "henry";
         String PASS = "12345";
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            if (connection == null || connection.isClosed()){
+             connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            }
             return connection;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al conectar a SQL Server: " + e.getMessage());
