@@ -256,6 +256,11 @@ public class JAdmin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         txtDescripcion.setBorder(javax.swing.BorderFactory.createTitledBorder("Descripcion "));
+        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescripcionActionPerformed(evt);
+            }
+        });
 
         txtId.setBorder(javax.swing.BorderFactory.createTitledBorder("ID"));
 
@@ -359,7 +364,7 @@ public class JAdmin extends javax.swing.JFrame {
     private void btn_AgregarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarProductosActionPerformed
         Producto producto = new Producto(Integer.parseInt(txtId.getText()), txtNombre.getText(), txtDescripcion.getText(), Integer.parseInt(txtCantidad.getText()), Double.parseDouble(txtPrecio.getText()));
         producto.setId(Integer.parseInt(txtId.getText()));
-        producto.setNombre(txtDescripcion.getText());
+        producto.setNombre(txtNombre.getText());
         producto.setDescripcion(txtDescripcion.getText());
         producto.setCantidad(Integer.parseInt(txtCantidad.getText()));
         producto.setPrecio(Double.parseDouble(txtPrecio.getText()));
@@ -372,6 +377,7 @@ public class JAdmin extends javax.swing.JFrame {
             ps.setString(3, producto.getDescripcion());
             ps.setInt(4, producto.getCantidad());
             ps.setDouble(5, producto.getPrecio());
+            ps.setInt (9,1);
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro de Productos", "Registro guardado existosamente", JOptionPane.PLAIN_MESSAGE);
             limpiarCampos();
@@ -491,6 +497,10 @@ public class JAdmin extends javax.swing.JFrame {
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_ActualizarActionPerformed
+
+    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionActionPerformed
 
     /**
      * @param args the command line arguments

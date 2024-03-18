@@ -10,13 +10,12 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 
-
 public class Conexion {
     private static Connection connection;
     public static Connection getConexion() {
-        String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=ED2024;"
+        String DB_URL = "jdbc:sqlserver://PC-NAT\\SQLEXPRESS:1433;databaseName=ED2024;"
                 + "encrypt=true;trustServerCertificate=true";
-        String USER = "henry";
+        String USER = "natalia";
         String PASS = "12345";
         try {
             if (connection == null || connection.isClosed()){
