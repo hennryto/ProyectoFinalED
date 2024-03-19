@@ -16,7 +16,7 @@ public class GestorUsuarios  {
     public GestorUsuarios() {
         this.primerNodo = null;
     }
-    public void agregarUsuario(Usuario usuario) {
+    public void agregarUsuario(Usuarios usuario) {
         NodoUsuario nuevoNodo = new NodoUsuario(usuario);
         if (primerNodo == null) {
             primerNodo = nuevoNodo;
@@ -30,7 +30,7 @@ public class GestorUsuarios  {
         JOptionPane.showMessageDialog(null, "Usuario agregado correctamente.");
     }
     
-    public Usuario buscarUsuario(String nombreUsuario) {
+    public Usuarios buscarUsuario(String nombreUsuario) {
         NodoUsuario actual = primerNodo;
         while (actual != null) {
             if (actual.getUsuario().getUsuario().equalsIgnoreCase(nombreUsuario)) {
@@ -43,7 +43,7 @@ public class GestorUsuarios  {
     }
     
      // Método para actualizar los datos de un usuario
-    public void actualizarUsuario(String nombreUsuario, Usuario nuevoUsuario) {
+    public void actualizarUsuario(String nombreUsuario, Usuarios nuevoUsuario) {
         NodoUsuario actual = primerNodo;
         while (actual != null) {
             if (actual.getUsuario().getUsuario().equalsIgnoreCase(nombreUsuario)) {

@@ -342,8 +342,7 @@ public class JUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-    Usuario usuario = new Usuario();
-    usuario.setId(Integer.parseInt(txtId.getText()));
+     Usuarios usuario = new Usuarios();
     usuario.setUsuario(txtUsuario.getText());
     usuario.setContrasenna(new String(txtPassword.getPassword()));
     usuario.setNombre(txtNombre.getText());
@@ -363,20 +362,19 @@ public class JUsuarios extends javax.swing.JFrame {
     } else{
     usuario.setTipodeUsuario("E");
     }
-
     
     try {
         Connection connection = Conexion.getConexion();
         PreparedStatement ps = connection.prepareStatement("INSERT INTO Usuarios(usuario,password,nombre,apellido,direccion,telefono,email,tipoUsuario,activo) VALUES(?,?,?,?,?,?,?,?,?)");
-        ps.setString(2,usuario.getUsuario());
-        ps.setString(3,usuario.getContrasenna());
-        ps.setString(4,usuario.getNombre());
-        ps.setString(5,usuario.getApellido());
+        ps.setString(1,usuario.getUsuario());
+        ps.setString(2,usuario.getContrasenna());
+        ps.setString(3,usuario.getNombre());
+        ps.setString(4,usuario.getApellido());
         ps.setString(5,usuario.getDireccion());
-        ps.setInt(7,usuario.getNumeroTelefono());
-        ps.setString(8,usuario.getEmail());
-        ps.setString(9,usuario.getTipodeUsuario());
- //       ps.setInt (10,1);
+        ps.setInt(6,usuario.getNumeroTelefono());
+        ps.setString(7,usuario.getEmail());
+        ps.setString(8,usuario.getTipodeUsuario());
+        ps.setInt (9,1);
         ps.executeUpdate();
         JOptionPane.showMessageDialog(null, "Registro de Usuarios", "Registro guardado existosamente", JOptionPane.PLAIN_MESSAGE, icono1);
         limpiar();
@@ -385,11 +383,11 @@ public class JUsuarios extends javax.swing.JFrame {
     catch(SQLException e) 
     {
     JOptionPane.showMessageDialog(null,e.toString());
-    }     
+    }   
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
-        try {
+       try {
         int row =tblUsuarios.getSelectedRow();
         int id =Integer.parseInt(tblUsuarios.getValueAt (row,0).toString());
          PreparedStatement ps;
@@ -399,7 +397,7 @@ public class JUsuarios extends javax.swing.JFrame {
         ps.setInt(1, id);
         rs = ps.executeQuery();
         while(rs.next()){
-       txtId.setText(String.valueOf(id));
+        txtId.setText(String.valueOf(id));
         txtUsuario.setText(rs.getString("usuario"));
         txtPassword.setText(rs.getString("password"));
         txtNombre.setText(rs.getString("nombre"));
@@ -542,7 +540,7 @@ public class JUsuarios extends javax.swing.JFrame {
    
 
 }
-   catch(SQLException e){
+    catch(SQLException e){
        JOptionPane.showMessageDialog(null,e.toString());
 
 

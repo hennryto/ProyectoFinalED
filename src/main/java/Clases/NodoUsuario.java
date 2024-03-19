@@ -9,19 +9,19 @@ package Clases;
  * @author HENRYTO
  */
 public class NodoUsuario  {
-    private Usuario usuario;
+    private Usuarios usuario;
     private NodoUsuario siguiente;
 
-    public NodoUsuario(Usuario usuario) {
+    public NodoUsuario(Usuarios usuario) {
         this.usuario = usuario;
         this.siguiente = null;
     }
 
-    public Usuario getUsuario() {
+    public Usuarios getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
     }
 

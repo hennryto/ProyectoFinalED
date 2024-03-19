@@ -6,7 +6,7 @@ package Display;
 
 import javax.swing.ImageIcon;
 import Clases.Conexion;
-import Clases.Usuario;
+import Clases.Usuarios;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -235,7 +235,7 @@ public class JLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordMousePressed
 
     private void loginBtnTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnTxtMouseClicked
-        Usuario usuario = new Usuario();
+        Usuarios usuario = new Usuarios();
         usuario.setUsuario(txtUsuario1.getText());
         usuario.setContrasenna(new String(txtPassword.getPassword()));
          try {

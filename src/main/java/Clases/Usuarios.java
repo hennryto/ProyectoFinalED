@@ -8,7 +8,7 @@ package Clases;
  *
  * @author HENRYTO
  */
-public class Usuario {
+public class Usuarios {
     private int id;
     private String usuario;
     private String contrasenna;
@@ -99,10 +99,10 @@ public class Usuario {
         this.activo = activo;
     }
 
-    public Usuario() {
+    public Usuarios() {
     }
 
-    public Usuario(int id, String usuario, String contrasenna, String nombre, String apellido, String direccion, int numeroTelefono, String email, String tipodeUsuario, int activo) {
+    public Usuarios(int id, String usuario, String contrasenna, String nombre, String apellido, String direccion, int numeroTelefono, String email, String tipodeUsuario, int activo) {
         this.id = id;
         this.usuario = usuario;
         this.contrasenna = contrasenna;
