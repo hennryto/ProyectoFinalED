@@ -377,7 +377,7 @@ public class JAdmin extends javax.swing.JFrame {
             ps.setString(3, producto.getDescripcion());
             ps.setInt(4, producto.getCantidad());
             ps.setDouble(5, producto.getPrecio());
-            ps.setInt (9,1);
+ //           ps.setInt (6,1);
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro de Productos", "Registro guardado existosamente", JOptionPane.PLAIN_MESSAGE);
             limpiarCampos();

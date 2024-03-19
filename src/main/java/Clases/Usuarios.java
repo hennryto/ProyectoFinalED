@@ -102,8 +102,7 @@ public class Usuarios {
     public Usuarios() {
     }
 
-    public Usuarios(int id, String usuario, String contrasenna, String nombre, String apellido, String direccion, int numeroTelefono, String email, String tipodeUsuario, int activo) {
-        this.id = id;
+    public Usuarios( String usuario, String contrasenna, String nombre, String apellido, String direccion, int numeroTelefono, String email, String tipodeUsuario, int activo) {
         this.usuario = usuario;
         this.contrasenna = contrasenna;
         this.nombre = nombre;
@@ -115,6 +114,7 @@ public class Usuarios {
         this.activo = activo;
     }
 
+    
     @Override
     public String toString() {
         return "Usuario{" +
