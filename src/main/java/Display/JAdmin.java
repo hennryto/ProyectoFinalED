@@ -8,6 +8,8 @@ import Clases.Conexion;
 import Clases.Producto;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,8 +18,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author HENRYTO
@@ -64,10 +79,11 @@ public class JAdmin extends javax.swing.JFrame {
         appName = new javax.swing.JLabel();
         btn_AgregarProductos = new javax.swing.JButton();
         btn_ModificarProductos = new javax.swing.JButton();
-        btn_EliminarProductos1 = new javax.swing.JButton();
+        btn_Eliminar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btn_Actualizar = new javax.swing.JButton();
         btn_Buscar = new javax.swing.JButton();
+        btn_Imprimir = new javax.swing.JButton();
         Header = new javax.swing.JPanel();
         Jheader2 = new javax.swing.JLabel();
         dateText = new javax.swing.JLabel();
@@ -82,7 +98,6 @@ public class JAdmin extends javax.swing.JFrame {
         tblProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         BackgroundAdmin.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundAdmin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -144,19 +159,19 @@ public class JAdmin extends javax.swing.JFrame {
             }
         });
 
-        btn_EliminarProductos1.setBackground(new java.awt.Color(102, 102, 255));
-        btn_EliminarProductos1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_EliminarProductos1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_EliminarProductos1.setText("Eliminar Productos");
-        btn_EliminarProductos1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-        btn_EliminarProductos1.setBorderPainted(false);
-        btn_EliminarProductos1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_EliminarProductos1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btn_EliminarProductos1.setIconTextGap(13);
-        btn_EliminarProductos1.setInheritsPopupMenu(true);
-        btn_EliminarProductos1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Eliminar.setBackground(new java.awt.Color(102, 102, 255));
+        btn_Eliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_Eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Eliminar.setText("Eliminar Producto");
+        btn_Eliminar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
+        btn_Eliminar.setBorderPainted(false);
+        btn_Eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_Eliminar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_Eliminar.setIconTextGap(13);
+        btn_Eliminar.setInheritsPopupMenu(true);
+        btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_EliminarProductos1ActionPerformed(evt);
+                btn_EliminarActionPerformed(evt);
             }
         });
 
@@ -196,45 +211,64 @@ public class JAdmin extends javax.swing.JFrame {
             }
         });
 
+        btn_Imprimir.setBackground(new java.awt.Color(102, 102, 255));
+        btn_Imprimir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_Imprimir.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Imprimir.setText("Imprimir");
+        btn_Imprimir.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
+        btn_Imprimir.setBorderPainted(false);
+        btn_Imprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_Imprimir.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_Imprimir.setIconTextGap(13);
+        btn_Imprimir.setInheritsPopupMenu(true);
+        btn_Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_users, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_EliminarProductos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_ModificarProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_Actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(MenuLayout.createSequentialGroup()
                         .addComponent(appName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 8, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_ModificarProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_AgregarProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Imprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(btn_AgregarProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(appName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(103, 103, 103)
+                .addGap(45, 45, 45)
                 .addComponent(btn_users, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(46, 46, 46)
                 .addComponent(jLabel1)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(btn_AgregarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_ModificarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_EliminarProductos1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
         );
 
         BackgroundAdmin.add(Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 646));
@@ -482,7 +516,7 @@ try {
         }
     }//GEN-LAST:event_btn_ModificarProductosActionPerformed
 
-    private void btn_EliminarProductos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarProductos1ActionPerformed
+    private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
         int id = Integer.parseInt(txtId.getText());
 
         try {
@@ -496,7 +530,7 @@ try {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
-    }//GEN-LAST:event_btn_EliminarProductos1ActionPerformed
+    }//GEN-LAST:event_btn_EliminarActionPerformed
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
         // TODO add your handling code here:
@@ -599,6 +633,57 @@ try {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_BuscarActionPerformed
 
+    private void btn_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ImprimirActionPerformed
+      try {
+        Connection connection = Conexion.getConexion();
+        
+        // Consulta para obtener todos los datos de la tabla de la base de datos
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM Productos");
+        ResultSet rs = ps.executeQuery();
+        
+        // Crear un documento PDF
+        Document document = new Document();
+ 
+        PdfWriter.getInstance(document, new FileOutputStream("tabla_productos.pdf"));
+        document.open();
+        
+        // Agregar un título al documento
+        document.add(new Paragraph("Tabla de Productos"));
+
+        // Crear una tabla PDF
+        PdfPTable table = new PdfPTable(5); // Número de columnas
+        
+        // Agregar encabezados de columnas
+        table.addCell("ID");
+        table.addCell("Nombre");
+        table.addCell("Descripción");
+        table.addCell("Cantidad");
+        table.addCell("Precio");
+        
+        // Agregar filas de la tabla desde la base de datos
+        while (rs.next()) {
+            table.addCell(String.valueOf(rs.getInt("id")));
+            table.addCell(rs.getString("nombre"));
+            table.addCell(rs.getString("descripcion"));
+            table.addCell(String.valueOf(rs.getInt("cantidad")));
+            table.addCell(String.valueOf(rs.getDouble("precio")));
+        }
+        
+        // Agregar la tabla al documento
+        document.add(table);
+        
+        // Cerrar el documento
+        document.close();
+        
+        JOptionPane.showMessageDialog(null, "Documento PDF creado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    } catch (SQLException | DocumentException | FileNotFoundException e) {
+        JOptionPane.showMessageDialog(null, "Error al generar el documento PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ImprimirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -649,7 +734,8 @@ try {
     private javax.swing.JButton btn_Actualizar;
     private javax.swing.JButton btn_AgregarProductos;
     private javax.swing.JButton btn_Buscar;
-    private javax.swing.JButton btn_EliminarProductos1;
+    private javax.swing.JButton btn_Eliminar;
+    private javax.swing.JButton btn_Imprimir;
     private javax.swing.JButton btn_ModificarProductos;
     private javax.swing.JButton btn_users;
     private javax.swing.JLabel dateText;
