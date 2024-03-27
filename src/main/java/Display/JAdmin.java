@@ -67,6 +67,7 @@ public class JAdmin extends javax.swing.JFrame {
         btn_EliminarProductos1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btn_Actualizar = new javax.swing.JButton();
+        btn_Buscar = new javax.swing.JButton();
         Header = new javax.swing.JPanel();
         Jheader2 = new javax.swing.JLabel();
         dateText = new javax.swing.JLabel();
@@ -179,6 +180,22 @@ public class JAdmin extends javax.swing.JFrame {
             }
         });
 
+        btn_Buscar.setBackground(new java.awt.Color(102, 102, 255));
+        btn_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_Buscar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Buscar.setText("Buscar");
+        btn_Buscar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
+        btn_Buscar.setBorderPainted(false);
+        btn_Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_Buscar.setIconTextGap(13);
+        btn_Buscar.setInheritsPopupMenu(true);
+        btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
@@ -196,6 +213,7 @@ public class JAdmin extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(btn_AgregarProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,11 +222,13 @@ public class JAdmin extends javax.swing.JFrame {
                 .addComponent(appName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103)
                 .addComponent(btn_users, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addGap(63, 63, 63)
                 .addComponent(jLabel1)
-                .addGap(24, 24, 24)
+                .addGap(32, 32, 32)
                 .addComponent(btn_AgregarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_ModificarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -534,6 +554,51 @@ try {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescripcionActionPerformed
 
+    private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
+    // Verificar si se ingresó un ID válido
+    if (txtId.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID de producto.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }  
+// Obtener el ID del producto a buscar
+    int idProductoABuscar = Integer.parseInt(txtId.getText());
+
+    try {
+        Connection connection = Conexion.getConexion();
+        
+        // Consulta para buscar el producto por ID
+        PreparedStatement ps = connection.prepareStatement("SELECT id, nombre, descripcion, cantidad, precio FROM Productos WHERE id = ?");
+        ps.setInt(1, idProductoABuscar);
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            // Si se encuentra el producto, mostrar sus detalles en los campos de texto
+            txtId.setText(String.valueOf(rs.getInt("id")));
+            txtNombre.setText(rs.getString("nombre"));
+            txtDescripcion.setText(rs.getString("descripcion"));
+            txtCantidad.setText(String.valueOf(rs.getInt("cantidad")));
+            txtPrecio.setText(String.valueOf(rs.getDouble("precio")));
+            
+            // Limpiar la tabla
+            DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
+            model.setRowCount(0);
+            
+            // Agregar el producto encontrado a la tabla
+            Object[] rowData = {rs.getInt("id"), rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("cantidad"), rs.getDouble("precio")};
+            model.addRow(rowData);
+        } else {
+            // Si no se encuentra el producto, mostrar un mensaje de error
+            JOptionPane.showMessageDialog(null, "No existen productos con ese ID.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_BuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -583,6 +648,7 @@ try {
     private javax.swing.JLabel appName;
     private javax.swing.JButton btn_Actualizar;
     private javax.swing.JButton btn_AgregarProductos;
+    private javax.swing.JButton btn_Buscar;
     private javax.swing.JButton btn_EliminarProductos1;
     private javax.swing.JButton btn_ModificarProductos;
     private javax.swing.JButton btn_users;
