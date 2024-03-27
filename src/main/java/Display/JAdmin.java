@@ -362,29 +362,44 @@ public class JAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_usersActionPerformed
 
     private void btn_AgregarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarProductosActionPerformed
-        Producto producto = new Producto(Integer.parseInt(txtId.getText()), txtNombre.getText(), txtDescripcion.getText(), Integer.parseInt(txtCantidad.getText()), Double.parseDouble(txtPrecio.getText()));
-        producto.setId(Integer.parseInt(txtId.getText()));
-        producto.setNombre(txtNombre.getText());
-        producto.setDescripcion(txtDescripcion.getText());
-        producto.setCantidad(Integer.parseInt(txtCantidad.getText()));
-        producto.setPrecio(Double.parseDouble(txtPrecio.getText()));
+ Producto producto = new Producto(Integer.parseInt(txtId.getText()), txtNombre.getText(), txtDescripcion.getText(), Integer.parseInt(txtCantidad.getText()), Double.parseDouble(txtPrecio.getText()));
+producto.setId(Integer.parseInt(txtId.getText()));
+producto.setNombre(txtNombre.getText());
+producto.setDescripcion(txtDescripcion.getText());
+producto.setCantidad(Integer.parseInt(txtCantidad.getText()));
+producto.setPrecio(Double.parseDouble(txtPrecio.getText()));
 
-        try {
-            Connection connection = Conexion.getConexion();
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO Productos(id, nombre, descripcion, cantidad, precio) VALUES(?, ?, ?, ?, ?)");
-            ps.setInt(1, producto.getId());
-            ps.setString(2, producto.getNombre());
-            ps.setString(3, producto.getDescripcion());
-            ps.setInt(4, producto.getCantidad());
-            ps.setDouble(5, producto.getPrecio());
- //           ps.setInt (6,1);
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro de Productos", "Registro guardado existosamente", JOptionPane.PLAIN_MESSAGE);
-            limpiarCampos();
-            cargarTablaProductos();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
+try {
+    Connection connection = Conexion.getConexion();
+    
+    // Verificar si el ID del producto ya existe
+    PreparedStatement psVerificar = connection.prepareStatement("SELECT COUNT(*) FROM Productos WHERE id = ?");
+    psVerificar.setInt(1, producto.getId());
+    ResultSet rsVerificar = psVerificar.executeQuery();
+    rsVerificar.next();
+    int count = rsVerificar.getInt(1);
+    
+    if (count > 0) {
+        JOptionPane.showMessageDialog(null, "El ID del producto ya existe, por favor, elija otro ID.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método
+    }
+    
+    // Insertar el nuevo producto si el ID no existe
+    PreparedStatement ps = connection.prepareStatement("INSERT INTO Productos(id, nombre, descripcion, cantidad, precio) VALUES(?, ?, ?, ?, ?)");
+    ps.setInt(1, producto.getId());
+    ps.setString(2, producto.getNombre());
+    ps.setString(3, producto.getDescripcion());
+    ps.setInt(4, producto.getCantidad());
+    ps.setDouble(5, producto.getPrecio());
+    ps.executeUpdate();
+    
+    JOptionPane.showMessageDialog(null, "Registro de Productos", "Registro guardado existosamente", JOptionPane.PLAIN_MESSAGE);
+    limpiarCampos();
+    cargarTablaProductos();
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
+}
+
 
     }//GEN-LAST:event_btn_AgregarProductosActionPerformed
 
@@ -470,31 +485,46 @@ public class JAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecioActionPerformed
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
-        try {
-            int row = tblProductos.getSelectedRow();
-            int id = Integer.parseInt(tblProductos.getValueAt(row, 0).toString());
-            PreparedStatement ps;
-            ResultSet rs;
-            Connection connection = Conexion.getConexion();
-            ps = connection.prepareStatement("SELECT id, nombre, descripcion, cantidad, precio FROM Productos WHERE id = ?");
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                txtId.setText(String.valueOf(id));
-                txtNombre.setText(rs.getString("nombre"));
-                txtDescripcion.setText(rs.getString("descripcion"));
-                txtCantidad.setText(rs.getString("cantidad"));
-                txtPrecio.setText(rs.getString("precio"));
+try {
+    int row = tblProductos.getSelectedRow();
+    int id = Integer.parseInt(tblProductos.getValueAt(row, 0).toString());
+    
+    // Verificar si el ID del producto ya existe
+    PreparedStatement psVerificar = Conexion.getConexion().prepareStatement("SELECT COUNT(*) FROM Productos WHERE id = ?");
+    psVerificar.setInt(1, id);
+    ResultSet rsVerificar = psVerificar.executeQuery();
+    rsVerificar.next();
+    int count = rsVerificar.getInt(1);
+    
+    if (count == 0) {
+        JOptionPane.showMessageDialog(null, "El ID del producto no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método
+    }
+    
+    // Obtener los detalles del producto si existe
+    PreparedStatement ps;
+    ResultSet rs;
+    Connection connection = Conexion.getConexion();
+    ps = connection.prepareStatement("SELECT id, nombre, descripcion, cantidad, precio FROM Productos WHERE id = ?");
+    ps.setInt(1, id);
+    rs = ps.executeQuery();
+    while (rs.next()) {
+        txtId.setText(String.valueOf(id));
+        txtNombre.setText(rs.getString("nombre"));
+        txtDescripcion.setText(rs.getString("descripcion"));
+        txtCantidad.setText(rs.getString("cantidad"));
+        txtPrecio.setText(rs.getString("precio"));
+    }
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString());
 
-            }
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-
-        }
+       }
     }//GEN-LAST:event_tblProductosMouseClicked
 
     private void btn_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ActualizarActionPerformed
+
+            cargarTablaProductos();
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_ActualizarActionPerformed
 

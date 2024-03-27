@@ -18,7 +18,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import Clases.GestorUsuarios;
-
+import Clases.Usuarios;
 public class JUsuarios extends javax.swing.JFrame {
 
     ButtonGroup btnGr;
@@ -342,12 +342,14 @@ public class JUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-     Usuarios usuario = new Usuarios();
+
+
+    Usuarios usuario = new Usuarios();
     usuario.setUsuario(txtUsuario.getText());
     usuario.setContrasenna(new String(txtPassword.getPassword()));
     usuario.setNombre(txtNombre.getText());
     usuario.setApellido(txtApellido.getText());
-    usuario.setDireccion(txtDireccion.getText());
+   usuario.setDireccion(txtDireccion.getText());
     usuario.setNumeroTelefono(Integer.parseInt(txtTelefono.getText()));
     usuario.setEmail(txtEmail.getText());
     ImageIcon icono1 = new ImageIcon("src\\main\\java\\Imagenes\\User+.png");
@@ -361,14 +363,14 @@ public class JUsuarios extends javax.swing.JFrame {
     usuario.setTipodeUsuario("E");; 
     } else{
     usuario.setTipodeUsuario("E");
-    }
+   }
     
-    try {
+   try {
         Connection connection = Conexion.getConexion();
         PreparedStatement ps = connection.prepareStatement("INSERT INTO Usuarios(usuario,password,nombre,apellido,direccion,telefono,email,tipoUsuario,activo) VALUES(?,?,?,?,?,?,?,?,?)");
         ps.setString(1,usuario.getUsuario());
         ps.setString(2,usuario.getContrasenna());
-        ps.setString(3,usuario.getNombre());
+       ps.setString(3,usuario.getNombre());
         ps.setString(4,usuario.getApellido());
         ps.setString(5,usuario.getDireccion());
         ps.setInt(6,usuario.getNumeroTelefono());
@@ -377,13 +379,13 @@ public class JUsuarios extends javax.swing.JFrame {
         ps.setInt (9,1);
         ps.executeUpdate();
         JOptionPane.showMessageDialog(null, "Registro de Usuarios", "Registro guardado existosamente", JOptionPane.PLAIN_MESSAGE, icono1);
-        limpiar();
-        cargarTabla();
-    }
-    catch(SQLException e) 
-    {
-    JOptionPane.showMessageDialog(null,e.toString());
-    }   
+       limpiar();
+       cargarTabla();
+   }
+   catch(SQLException e) 
+   {
+   JOptionPane.showMessageDialog(null,e.toString());
+   }   
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
