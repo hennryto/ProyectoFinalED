@@ -89,8 +89,7 @@ public class JUsuarios extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Registro de Usuarios");
 
-        tblUsuarios.setBackground(new java.awt.Color(13, 71, 161));
-        tblUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        tblUsuarios.setBackground(new java.awt.Color(204, 204, 255));
         tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -121,7 +120,7 @@ public class JUsuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblUsuarios);
 
-        jPanel1.setBackground(new java.awt.Color(25, 118, 210));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 

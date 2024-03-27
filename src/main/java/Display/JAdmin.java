@@ -86,10 +86,11 @@ public class JAdmin extends javax.swing.JFrame {
         BackgroundAdmin.setBackground(new java.awt.Color(255, 255, 255));
         BackgroundAdmin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Menu.setBackground(new java.awt.Color(13, 71, 161));
+        Menu.setBackground(new java.awt.Color(153, 153, 255));
+        Menu.setForeground(new java.awt.Color(204, 204, 255));
         Menu.setPreferredSize(new java.awt.Dimension(270, 634));
 
-        btn_users.setBackground(new java.awt.Color(21, 101, 192));
+        btn_users.setBackground(new java.awt.Color(102, 102, 255));
         btn_users.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_users.setForeground(new java.awt.Color(255, 255, 255));
         btn_users.setText("Usuarios");
@@ -110,7 +111,7 @@ public class JAdmin extends javax.swing.JFrame {
         appName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         appName.setText("Inventory X");
 
-        btn_AgregarProductos.setBackground(new java.awt.Color(21, 101, 192));
+        btn_AgregarProductos.setBackground(new java.awt.Color(102, 102, 255));
         btn_AgregarProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_AgregarProductos.setForeground(new java.awt.Color(255, 255, 255));
         btn_AgregarProductos.setText("Agregar Productos");
@@ -126,7 +127,7 @@ public class JAdmin extends javax.swing.JFrame {
             }
         });
 
-        btn_ModificarProductos.setBackground(new java.awt.Color(21, 101, 192));
+        btn_ModificarProductos.setBackground(new java.awt.Color(102, 102, 255));
         btn_ModificarProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_ModificarProductos.setForeground(new java.awt.Color(255, 255, 255));
         btn_ModificarProductos.setText("Modificar Productos");
@@ -142,7 +143,7 @@ public class JAdmin extends javax.swing.JFrame {
             }
         });
 
-        btn_EliminarProductos1.setBackground(new java.awt.Color(21, 101, 192));
+        btn_EliminarProductos1.setBackground(new java.awt.Color(102, 102, 255));
         btn_EliminarProductos1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_EliminarProductos1.setForeground(new java.awt.Color(255, 255, 255));
         btn_EliminarProductos1.setText("Eliminar Productos");
@@ -158,11 +159,11 @@ public class JAdmin extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Menu de Opciones");
 
-        btn_Actualizar.setBackground(new java.awt.Color(21, 101, 192));
+        btn_Actualizar.setBackground(new java.awt.Color(102, 102, 255));
         btn_Actualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_Actualizar.setForeground(new java.awt.Color(255, 255, 255));
         btn_Actualizar.setText("Actualizar");
@@ -218,7 +219,7 @@ public class JAdmin extends javax.swing.JFrame {
 
         BackgroundAdmin.add(Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 646));
 
-        Header.setBackground(new java.awt.Color(25, 118, 210));
+        Header.setBackground(new java.awt.Color(153, 153, 255));
         Header.setPreferredSize(new java.awt.Dimension(744, 150));
 
         Jheader2.setBackground(new java.awt.Color(255, 255, 255));
@@ -321,6 +322,7 @@ public class JAdmin extends javax.swing.JFrame {
         jMessage.setText("Haciendo tu vida más sencilla ");
         BackgroundAdmin.add(jMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 0, 246, 46));
 
+        tblProductos.setBackground(new java.awt.Color(204, 204, 255));
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
